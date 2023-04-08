@@ -20,4 +20,23 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
+  today = dayjs();
+  $("#currentDay").html(today.format("dddd, MMMM D, YYYY"));
 });
+
+buildRow = function(row_hour) {
+  row = $("<div>");
+  row.attr("id", "hour-" + row_hour);
+  row.addClass("row time-block");
+  if (row_hour < dayjs().format("h")) {
+    row.addClass("past");
+  } else if (row_hour == dayjs().format("h")) {
+    row.addClass("present");
+  } else {
+    row.addClass("future");
+  }
+  row.append("<div class=\"col-2 col-md-1 hour text-center py-3\">"+dayjs().hour(row_hour).format("hA")+"</div>");
+  row.append("<textarea class=\"col-8 col-md-10 description\" rows=\"3\"> </textarea>");
+  row.append("<button class=\"btn saveBtn col-2 col-md-1\" aria-label=\"save\"><i class=\"fas fa-save\" aria-hidden=\"true\"></i></button>");
+  return row;
+}

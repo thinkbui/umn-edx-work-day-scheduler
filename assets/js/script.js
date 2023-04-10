@@ -76,8 +76,15 @@ saveClick = function() {
 }
 
 storeCalData = function() {
-  var cal_data_json = JSON.stringify(calData);
+  cal_data_json = JSON.stringify(calData);
   localStorage.setItem("umn-edx-work-day-scheduler-data", cal_data_json);
+}
+
+fetchCalData = function() {
+  cal_data_json = localStorage.getItem("umn-edx-work-day-scheduler-data");
+  if (cal_data_json) {
+    calData = JSON.parse(cal_data_json);
+  }
 }
 
 currentDateKey = function() {

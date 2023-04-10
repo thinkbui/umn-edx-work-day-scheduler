@@ -20,8 +20,7 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-  today = dayjs();
-  $("#currentDay").html(today.format("dddd, MMMM D, YYYY"));
+  loadCurrentDate();
 
   deleteAllRows();
   buildAllRows();
@@ -31,6 +30,11 @@ $(function () {
 
 start_hour = 9;
 end_hour = 17;
+
+loadCurrentDate = function() {
+  today = dayjs();
+  $("#currentDay").html(today.format("dddd, MMMM D, YYYY"));
+}
 
 buildAllRows = function() {
   for(i=start_hour;i<=end_hour;i++){

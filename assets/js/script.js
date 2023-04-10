@@ -25,8 +25,13 @@ $(function () {
   deleteAllRows();
   buildAllRows();
 
+  fetchCalData();
+  loadCalData();
+
   $(".saveBtn").click(saveClick);
 });
+
+calData = {};
 
 start_hour = 9;
 end_hour = 17;
@@ -54,7 +59,7 @@ buildRow = function(row_hour) {
     row.addClass("future");
   }
   row.append("<div class=\"col-2 col-md-1 hour text-center py-3\">"+dayjs().hour(row_hour).format("hA")+"</div>");
-  row.append("<textarea class=\"col-8 col-md-10 description\" rows=\"3\"> </textarea>");
+  row.append("<textarea class=\"col-8 col-md-10 description\" rows=\"3\"></textarea>");
   row.append("<button class=\"btn saveBtn col-2 col-md-1\" aria-label=\"save\"><i class=\"fas fa-save\" aria-hidden=\"true\"></i></button>");
   return row;
 }
@@ -63,7 +68,37 @@ deleteAllRows = function() {
   $(".container-lg").empty();
 }
 
-saveClick = function(){
-  console.log( $(this).siblings(".hour").html() );
-  console.log( $(this).siblings(".description").val() );
+saveClick = function() {
+  if (!calData[currentDateKey()]) {
+    calData[currentDateKey()] = {};
+  }
+  hour = $(this).parent().attr("id");
+  description = $(this).siblings(".description").val();
+  calData[currentDateKey()][hour] = description;
+  storeCalData();
+}
+
+storeCalData = function() {
+  cal_data_json = JSON.stringify(calData);
+  localStorage.setItem("umn-edx-work-day-scheduler-data", cal_data_json);
+}
+
+fetchCalData = function() {
+  cal_data_json = localStorage.getItem("umn-edx-work-day-scheduler-data");
+  if (cal_data_json) {
+    calData = JSON.parse(cal_data_json);
+  }
+}
+
+loadCalData = function() {
+  calDataToday = calData[currentDateKey()];
+  if (calDataToday) {
+    $.each(calDataToday, function(hour, description) {
+      $("#"+hour).children(".description").val(description);
+    });
+  }
+}
+
+currentDateKey = function() {
+  return dayjs().format("YYYY-MM-DD");
 }

@@ -64,7 +64,8 @@ buildRow = function(row_hour) {
   row.append(buildHourCell(row_hour));
   // row.append("<textarea class=\"col-8 col-md-10 description\" rows=\"3\"></textarea>");
   row.append(buildDescriptionCell());
-  row.append("<button class=\"btn saveBtn col-2 col-md-1\" aria-label=\"save\"><i class=\"fas fa-save\" aria-hidden=\"true\"></i></button>");
+  // row.append("<button class=\"btn saveBtn col-2 col-md-1\" aria-label=\"save\"><i class=\"fas fa-save\" aria-hidden=\"true\"></i></button>");
+  row.append(buildSaveCell());
   return row;
 }
 
@@ -79,8 +80,21 @@ buildHourCell = function(row_hour) {
 buildDescriptionCell = function() {
   desc_cell = $("<textarea>");
   desc_cell.addClass("col-8 col-md-10 description");
-  desc_cell.attr("rows","3");
+  desc_cell.attr("rows", "3");
   return desc_cell;
+}
+
+buildSaveCell = function() {
+  btn_cell = $("<button>");
+  btn_cell.addClass("btn saveBtn col-2 col-md-1");
+  btn_cell.attr("aria-label", "save");
+
+  icon_elem = $("<i>");
+  icon_elem.addClass("fas fa-save");
+  icon_elem.attr("aria-hidden", "true");
+
+  btn_cell.append(icon_elem);
+  return btn_cell;
 }
 
 deleteAllRows = function() {

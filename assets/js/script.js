@@ -32,7 +32,6 @@ $(function () {
 });
 
 calData = {};
-
 start_hour = 9;
 end_hour = 17;
 
@@ -50,21 +49,9 @@ buildAllRows = function() {
 buildRow = function(row_hour) {
   row = $("<div>");
   row.attr("id", "hour-" + row_hour);
-  row.addClass("row time-block");
-  // if (row_hour < dayjs().format("H")) {
-  if (row_hour < "11") {
-    row.addClass("past");
-  // } else if (row_hour == dayjs().format("H")) {
-  } else if (row_hour == "11") {
-    row.addClass("present");
-  } else {
-    row.addClass("future");
-  }
-  // row.append("<div class=\"col-2 col-md-1 hour text-center py-3\">"+dayjs().hour(row_hour).format("hA")+"</div>");
+  row.addClass("row time-block " + rowType(row_hour));
   row.append(buildHourCell(row_hour));
-  // row.append("<textarea class=\"col-8 col-md-10 description\" rows=\"3\"></textarea>");
   row.append(buildDescriptionCell());
-  // row.append("<button class=\"btn saveBtn col-2 col-md-1\" aria-label=\"save\"><i class=\"fas fa-save\" aria-hidden=\"true\"></i></button>");
   row.append(buildSaveCell());
   return row;
 }
@@ -95,6 +82,15 @@ buildSaveCell = function() {
 
   btn_cell.append(icon_elem);
   return btn_cell;
+}
+
+rowType = function(row_hour) {
+  if (row_hour < dayjs().format("H")) {
+    return "past";
+  } else if (row_hour == dayjs().format("H")) {
+    return "present";
+  }
+  return "future";
 }
 
 deleteAllRows = function() {

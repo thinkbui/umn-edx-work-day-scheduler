@@ -26,6 +26,7 @@ $(function () {
   buildAllRows();
 
   fetchCalData();
+  loadCalData();
 
   $(".saveBtn").click(saveClick);
 });
@@ -93,8 +94,6 @@ loadCalData = function() {
   calDataToday = calData[currentDateKey()];
   if (calDataToday) {
     $.each(calDataToday, function(hour, description) {
-      console.log(hour);
-      console.log(description);
       $("#"+hour).children(".description").val(description);
     });
   }

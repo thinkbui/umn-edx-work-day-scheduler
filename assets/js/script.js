@@ -65,4 +65,5 @@ deleteAllRows = function() {
 
 saveClick = function(){
   console.log( $(this).siblings(".hour").html() );
+  console.log( $(this).siblings(".description").val() );
 }

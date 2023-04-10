@@ -23,7 +23,7 @@ $(function () {
   today = dayjs();
   $("#currentDay").html(today.format("dddd, MMMM D, YYYY"));
 
-  $(".container-lg").empty();
+  deleteAllRows();
   buildAllRows();
 
   $(".saveBtn").click(saveClick);
@@ -53,6 +53,10 @@ buildRow = function(row_hour) {
   row.append("<textarea class=\"col-8 col-md-10 description\" rows=\"3\"> </textarea>");
   row.append("<button class=\"btn saveBtn col-2 col-md-1\" aria-label=\"save\"><i class=\"fas fa-save\" aria-hidden=\"true\"></i></button>");
   return row;
+}
+
+deleteAllRows = function() {
+  $(".container-lg").empty();
 }
 
 saveClick = function(){

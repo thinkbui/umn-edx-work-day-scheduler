@@ -23,17 +23,28 @@ $(function () {
   today = dayjs();
   $("#currentDay").html(today.format("dddd, MMMM D, YYYY"));
 
+  $(".container-lg").empty();
+  buildAllRows();
 
   $(".saveBtn").click(saveClick);
 });
+
+start_hour = 9;
+end_hour = 17;
+
+buildAllRows = function() {
+  for(i=start_hour;i<=end_hour;i++){
+    $(".container-lg").append(buildRow(i));
+  }
+}
 
 buildRow = function(row_hour) {
   row = $("<div>");
   row.attr("id", "hour-" + row_hour);
   row.addClass("row time-block");
-  if (row_hour < dayjs().format("h")) {
+  if (row_hour < dayjs().format("H")) {
     row.addClass("past");
-  } else if (row_hour == dayjs().format("h")) {
+  } else if (row_hour == dayjs().format("H")) {
     row.addClass("present");
   } else {
     row.addClass("future");
@@ -45,5 +56,5 @@ buildRow = function(row_hour) {
 }
 
 saveClick = function(){
-  console.log( $(this).siblings(".hour").html());
+  console.log( $(this).siblings(".hour").html() );
 }

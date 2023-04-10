@@ -25,6 +25,8 @@ $(function () {
   deleteAllRows();
   buildAllRows();
 
+  fetchCalData();
+
   $(".saveBtn").click(saveClick);
 });
 
@@ -84,6 +86,17 @@ fetchCalData = function() {
   cal_data_json = localStorage.getItem("umn-edx-work-day-scheduler-data");
   if (cal_data_json) {
     calData = JSON.parse(cal_data_json);
+  }
+}
+
+loadCalData = function() {
+  calDataToday = calData[currentDateKey()];
+  if (calDataToday) {
+    $.each(calDataToday, function(hour, description) {
+      console.log(hour);
+      console.log(description);
+      $("#"+hour).children(".description").val(description);
+    });
   }
 }
 

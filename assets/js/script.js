@@ -51,17 +51,28 @@ buildRow = function(row_hour) {
   row = $("<div>");
   row.attr("id", "hour-" + row_hour);
   row.addClass("row time-block");
-  if (row_hour < dayjs().format("H")) {
+  // if (row_hour < dayjs().format("H")) {
+  if (row_hour < "11") {
     row.addClass("past");
-  } else if (row_hour == dayjs().format("H")) {
+  // } else if (row_hour == dayjs().format("H")) {
+  } else if (row_hour == "11") {
     row.addClass("present");
   } else {
     row.addClass("future");
   }
-  row.append("<div class=\"col-2 col-md-1 hour text-center py-3\">"+dayjs().hour(row_hour).format("hA")+"</div>");
+  // row.append("<div class=\"col-2 col-md-1 hour text-center py-3\">"+dayjs().hour(row_hour).format("hA")+"</div>");
+  row.append(buildHourCell(row_hour));
   row.append("<textarea class=\"col-8 col-md-10 description\" rows=\"3\"></textarea>");
   row.append("<button class=\"btn saveBtn col-2 col-md-1\" aria-label=\"save\"><i class=\"fas fa-save\" aria-hidden=\"true\"></i></button>");
   return row;
+}
+
+buildHourCell = function(row_hour) {
+  cell_hour_text = dayjs().hour(row_hour).format("hA");
+  hour_cell = $("<div>");
+  hour_cell.addClass("col-2 col-md-1 hour text-center py-3");
+  hour_cell.html(cell_hour_text);
+  return hour_cell;
 }
 
 deleteAllRows = function() {

@@ -8,7 +8,7 @@ The data is stored in your browser's local storage, so data saved on one browser
 
 The day's events are saved and stored based upon date so that only the current day is displayed.  This is to prevent events from multiple days to be displayed at once.
 
-At present there is no feature to view or edit other days.  There are also no means of purging old data at the moment.  This could easily be added at a later time.
+At present there is no feature within the app to view or edit other days.  There are also no means of purging old data at the moment.  These could easily be added at a later time.
 
 ## LIVE VIEW
 The scheduler can be viewed here: https://thinkbui.github.io/umn-edx-work-day-scheduler/

@@ -93,9 +93,10 @@ buildSaveCell = function() {
 // Helper to add the appropriate coloring for each row based on whether its hour has passed
 // Defaults to green for the future
 rowType = function(row_hour) {
-  if (row_hour < datetime_now.format("H")) {
+  current_hour = datetime_now.format("H");
+  if (row_hour < current_hour) {
     return "past";
-  } else if (row_hour == datetime_now.format("H")) {
+  } else if (row_hour == current_hour) {
     return "present";
   }
   return "future";
